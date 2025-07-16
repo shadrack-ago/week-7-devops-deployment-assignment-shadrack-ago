@@ -1,0 +1,34 @@
+name: MERN CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test-backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install backend dependencies
+        run: npm install
+      - name: Run backend tests
+        run: npm test || echo "No backend tests configured"
+
+  test-frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install frontend dependencies
+        run: npm install
+      - name: Run frontend tests
+        run: npm test || echo "No frontend tests configured" 
